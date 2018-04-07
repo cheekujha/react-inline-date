@@ -45,6 +45,7 @@ class DateInput extends Component{
 			timeState;
 		let type = this.props.type ? this.props.type.toLowerCase() : TYPE_DATE;
 
+		this._initMethods();
 		if(type === TYPE_TIME){
 			if(this.props.value && !isNaN(this.props.value)){
 				timeState = this._processTimeValue(this.props.value);
@@ -69,10 +70,30 @@ class DateInput extends Component{
 		}
 	}
 
+	_initMethods(){
+		this._processDateTimeValue = this._processDateTimeValue.bind(this);
+		this._processTimeValue = this._processTimeValue.bind(this);
+		this._checkNextChar = this._checkNextChar.bind(this);
+		this._handleDayChange = this._handleDayChange.bind(this);
+		this._handleMonthChange = this._handleMonthChange.bind(this);
+		this._handleYearChange = this._handleYearChange.bind(this);
+		this._handleHourChange = this._handleHourChange.bind(this);
+		this._handleMinuteChange = this._handleMinuteChange.bind(this);
+		this._inputChanged = this._inputChanged.bind(this);
+		this._focusNext = this._focusNext.bind(this);
+		this._focusPrev = this._focusPrev.bind(this);
+		this._handleKeyDown = this._handleKeyDown.bind(this);
+		this._normalizeValue = this._normalizeValue.bind(this);
+		this._handleUpArrowKey = this._handleUpArrowKey.bind(this);
+		this._handleDownArrowKey = this._handleDownArrowKey.bind(this);
+		this._handleTabKey = this._handleTabKey.bind(this);
+		this._checkCommit = this._checkCommit.bind(this);
+		this._commitValue = this._commitValue.bind(this);
+	}
+
 	componentWillReceiveProps(nextProps){
 		let dateState,
 			timeState;
-
 		if(this.props.value != nextProps.value && typeof nextProps.value != "undefined"){
 			if(nextProps.type.toLowerCase() === TYPE_TIME){
 				timeState = this._processTimeValue(nextProps.value);

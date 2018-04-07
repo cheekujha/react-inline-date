@@ -6,11 +6,18 @@ import styles from './example.scss';
 class SimpleExample extends Component {
 	constructor(props){
 		super(props);
-		this.state = {};
+		this.state = {
+			value: undefined
+		};
+
+		this._dateChanged = this._dateChanged.bind(this);
 	}
 
 	_dateChanged(timestamp, event){
-		alert(new Date(timestamp).toString());
+		// alert(new Date(timestamp).toString());
+		this.setState({
+			value: timestamp
+		});
 	}
 
 	render(){
@@ -22,7 +29,7 @@ class SimpleExample extends Component {
 					</div>
 				</div>
 				<div className="date-input-parent">
-					<DateInput onCommit={ this._dateChanged } type={TYPE_DATE}/>
+					<DateInput onCommit={ this._dateChanged } type={TYPE_DATE} value={ this.state.value }/>
 				</div>
 			</div>
 		)
