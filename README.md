@@ -4,7 +4,7 @@
 
 ## Demo
 
-[https://cheekujha.github.io/react-table-filter/](https://cheekujha.github.io/react-table-filter/)
+[https://cheekujha.github.io/react-table-filter/](https://cheekujha.github.io/react-inline-date/)
 
 ## Install
 You need to have react and react-dom as dependencies in your project.
