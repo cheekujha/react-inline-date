@@ -42,6 +42,7 @@ class Example extends React.Component {
 
   render() {
     return <DateInput
+        type={"date"}
         value={this.state.startDate}
         onCommit={this.handleChange}
     />;
@@ -58,7 +59,7 @@ Name | Type | Default | Required | Description
 :--- | :--- | :------ | :------- | :----------
 type | String | 'date' | true | Can be one of ['date', 'datetime', 'time']
 value | Timestamp | undefined | false | Initial Value
-onCommit | function(timestamp, event) | | true | Function called with filtered data and updated filter configuration
+onCommit | function(timestamp, event) | | true | Function called when a date is selected
 maxOffset | Timestamp | | false | Date Upper limit
 minOffset | Timestamp | | false | Date Lower Limit
 
