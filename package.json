@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack",
     "build-example": "cd examples; ../node_modules/.bin/webpack",
-    "run-example": "cd examples; ../node_modules/.bin/webpack-dev-server --content-base ../docs --inline --hot --config webpack.config.js"
+    "run-example": "cd examples; ../node_modules/.bin/webpack-dev-server --content-base ../docs --inline --hot --config webpack.config.js",
+  	"release": "npm run build; npm publish"
   },
   "peerDependencies": {
     "react": "*",
