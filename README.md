@@ -1,6 +1,6 @@
 # react-inline-date
 
-> React Date Input Component . See image below for example.
+> React Date Input Component.
 
 ## Install
 You need to have react and react-dom as dependencies in your project.
