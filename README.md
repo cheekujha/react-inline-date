@@ -27,7 +27,7 @@ import DateInput from 'react-inline-date';
 1. Wrap header columns (th / td) with TableFilter as shown below.
 ```
 import React from 'react';
-import DateInput from 'react-inline-date';
+import DateInput,{TYPE_DATE} from 'react-inline-date';
 
 class Example extends React.Component {
   constructor (props) {
@@ -46,7 +46,7 @@ class Example extends React.Component {
 
   render() {
     return <DateInput
-        type={"date"}
+        type={TYPE_DATE}
         value={this.state.startDate}
         onCommit={this.handleChange}
     />;

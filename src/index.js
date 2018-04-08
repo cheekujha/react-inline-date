@@ -95,9 +95,10 @@ class DateInput extends Component{
 		let dateState,
 			timeState;
 		if(this.props.value != nextProps.value && typeof nextProps.value != "undefined"){
+			let type = nextProps.type ? nextProps.type.toLowerCase() : TYPE_DATE;
 			if(nextProps.type.toLowerCase() === TYPE_TIME){
 				timeState = this._processTimeValue(nextProps.value);
-				this.setSate({
+				this.setState({
 					hour: timeState ? timeState.hour : '',
 					min: timeState ? timeState.min : ''
 				});
@@ -157,13 +158,14 @@ class DateInput extends Component{
 			newValue = newValue.slice(0, newValue.length - 1);
 			this._focusNext(type);
 		}
+		return newValue;
 	}
 
 	_handleDayChange(newValue){
 		let invalid = false;
 		const type = 'dd';
 		let intValue = parseInt(newValue);
-		if(isNaN(intValue)){
+		if(isNaN(newValue)){
 			invalid = true;
 		}
 
@@ -173,7 +175,8 @@ class DateInput extends Component{
 			if(intValue < 1){
 				newValue = ["0", MIN[type]].join('');
 			}
-			this._focusNext(type);
+			// Only move forward whrn value is valid(characters entered should not trigger next)
+			!invalid && this._focusNext(type);
 		}else{
 			if(intValue > 3){
 				this._focusNext(type);
@@ -191,7 +194,7 @@ class DateInput extends Component{
 		let invalid = false;
 		const type = 'mm';
 		let intValue = parseInt(newValue);
-		if(isNaN(intValue)){
+		if(isNaN(newValue)){
 			invalid = true;
 		}
 
@@ -201,7 +204,7 @@ class DateInput extends Component{
 			if(intValue < 1){
 				newValue = ["0", MIN[type]].join('');
 			}
-			this._focusNext(type);
+			!invalid && this._focusNext(type);
 		}else{
 			if(intValue > 1){
 				this._focusNext(type);
@@ -219,7 +222,7 @@ class DateInput extends Component{
 		let invalid = false;
 		const type = 'yyyy';
 		let intValue = parseInt(newValue);
-		if(isNaN(intValue)){
+		if(isNaN(newValue)){
 			invalid = true;
 		}
 
@@ -229,7 +232,7 @@ class DateInput extends Component{
 			if(intValue < 1){
 				newValue = "0001";
 			}
-			this._focusNext(type);
+			!invalid && this._focusNext(type);
 		}
 
 		if(typeof this.props.minYear != undefined){
@@ -245,14 +248,14 @@ class DateInput extends Component{
 		let invalid = false;
 		const type = 'hour';
 		let intValue = parseInt(newValue);
-		if(isNaN(intValue)){
+		if(isNaN(newValue)){
 			invalid = true;
 		}
 
 		if(newValue.length >= 2){
 			newValue = newValue.substr(0, 2);
 			intValue = parseInt(newValue);
-			this._focusNext(type);
+			!invalid && this._focusNext(type);
 		}else{
 			if(intValue > 2){
 				this._focusNext(type);
@@ -270,7 +273,7 @@ class DateInput extends Component{
 		let invalid = false;
 		const type = 'minute';
 		let intValue = parseInt(newValue);
-		if(isNaN(intValue)){
+		if(isNaN(newValue)){
 			invalid = true;
 		}
 
@@ -294,7 +297,7 @@ class DateInput extends Component{
 			let newState = {};
 
 			if(newValue.length > 0){
-				this._checkNextChar(newValue);
+				newValue = this._checkNextChar(newValue);
 			}
 
 			switch (type){
@@ -501,13 +504,13 @@ class DateInput extends Component{
 			case 'yyyy': {
 				if(this.props.type === TYPE_DATE){
 					this._checkCommit(this.state, event, true);	
-					event.preventDefault();
-					break;
+					// event.preventDefault();
 				}
+				break;
 			}
 			case 'min': {
 				this._checkCommit(this.state, event, true);	
-				event.preventDefault();
+				// event.preventDefault();
 				break;
 			}
 			default:{
@@ -579,8 +582,9 @@ class DateInput extends Component{
 		let minInputClassName = "date-input min";
 		let dateHTML,
 			timeHTML;
+		let type = this.props.type ? this.props.type.toLowerCase() : TYPE_DATE;
 
-		if(this.props.type === TYPE_DATE || this.props.type === TYPE_DATE_TIME){
+		if(type === TYPE_DATE || type === TYPE_DATE_TIME){
 			dateHTML = (
 				<div className="date-input-box date">
 					<input className={ ddInputClassName }
@@ -607,7 +611,7 @@ class DateInput extends Component{
 			);
 		}
 
-		if(this.props.type === TYPE_DATE_TIME || this.props.type === TYPE_TIME){
+		if(type === TYPE_DATE_TIME || type === TYPE_TIME){
 			timeHTML = (
 				<div className="date-input-box time">
 					<input className={ hourInputClassName }

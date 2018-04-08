@@ -41,5 +41,18 @@ body{
 .date-input-parent{
 	position: relative;
 	padding: 10px;
-	text-align: center;
+	text-align: left;
+}
+
+.date-input-editor{
+	display: inline-block;
+}
+.date-input{
+	width: 50px;
+}
+.date-input-box {
+	display: inline-block;
+	&.time{
+		margin-left: 10px;
+	}
 }
